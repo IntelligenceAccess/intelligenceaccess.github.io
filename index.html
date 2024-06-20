@@ -30,6 +30,40 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+
+  <script>
+function submitForm(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const data = {
+        name: form.name.value,
+        phone: form.phone.value,
+        type: form.type.value,
+        email: form.email.value,
+        message: form.message.value
+    };
+
+    console.log(data);
+    
+    const response = fetch('https://script.google.com/macros/s/AKfycbz1P39Q4oAjPE9ODzujNxFMN9UdwS4lScfJpr-bcIZQnsG-SYzarVuMuXztK0lqfl8/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    
+    const result = response.json();
+    if (result.result === 'success') {
+        alert('Thank you, we will contact you shortly.');
+        form.reset();
+    } else {
+        alert('Hrrmm, something went wrong.');
+    }
+}
+</script>
+
 </head>
 
 <body id="body" data-spy="scroll" data-target=".header">
@@ -47,18 +81,6 @@
               <i class="fa fa-map-marker" aria-hidden="true"></i>
               <span>
                 Global
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              <span>
-                0450 143 359
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <span>
-                benchristopher@accessigence.com
               </span>
             </a>
           </div>
@@ -110,7 +132,20 @@
     </header>
     <!-- end header section -->
     <!-- slider section -->
-    <section class="slider_section ">
+     <section class="slider_section">
+      <div class="container ">
+        <div class="row">
+          <h1>
+            How many data implementations are you getting for your money per year?
+          </h1>
+          <h1>
+            <br><i>If you said 2 or more, well done, you're one of the lucky ones. For everyone else, we're here to get you on track.</i>
+          </h1>
+        </div>
+      </div>
+
+     </section>
+    <section class="slider_section">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="7000">
@@ -492,37 +527,39 @@
             <div class="heading_container heading_center">
               <h2>Get In Touch</h2>
             </div>
-            <form action="">
+            <form onsubmit="submitForm(event)">
               <div class="form-row">
                 <div class="form-group col">
-                  <input type="text" class="form-control" placeholder="Your Name" />
+                  <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-lg-6">
-                  <input type="text" class="form-control" placeholder="Phone Number" />
+                  <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone Number" />
                 </div>
                 <div class="form-group col-lg-6">
-                  <select name="" id="" class="form-control wide">
-                    <option value="">Select Service</option>
-                    <option value="">Service 1</option>
-                    <option value="">Service 2</option>
-                    <option value="">Service 3</option>
+                  <select name="type" id="type" class="form-control wide">
+                    <option value="">Project Type</option>
+                    <option value="">Intelligent Automation</option>
+                    <option value="">Generative A.I</option>
+                    <option value="">Machine Learning</option>
+                    <option value="">Data Platform</option>
+                    <option value="">Other</option>
                   </select>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col">
-                  <input type="email" class="form-control" placeholder="Email" />
+                  <input type="email" name="email" id="email" class="form-control" placeholder="Email" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col">
-                  <input type="text" class="message-box form-control" placeholder="Message" />
+                  <textarea  type="text" name="message" id="message" class="message-box form-control" placeholder="Message" ></textarea>
                 </div>
               </div>
               <div class="btn_box">
-                <button>
+                <button type="submit">
                   SEND
                 </button>
               </div>
@@ -536,7 +573,7 @@
   <!-- end contact section -->
 
   <!-- client section -->
-
+<!-- 
   <section class="client_section layout_padding">
     <div class="container ">
       <div class="heading_container heading_center">
@@ -630,7 +667,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- end client section -->
 
@@ -643,31 +680,17 @@
 
 
           </div>
-          <div class="col-md-5 ">
-            <div class="info_contact">
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  0450 143 359
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  benchristopher@accessigence.com
-                </span>
-              </a>
-            </div>
-            </div>
+
 
           <div class="col-md-4 ">
             <div class="social_box">
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
                 <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+
             </div>
           </div>
         </div>
