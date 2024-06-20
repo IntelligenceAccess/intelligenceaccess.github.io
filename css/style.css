@@ -1048,9 +1048,6 @@ a:focus {
   width: 600px;
   padding: 20px;
   margin: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   background-color: #363232;
   border-radius: 25px;
   -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
