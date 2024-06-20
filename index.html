@@ -32,36 +32,45 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
   <script>
-function submitForm(event) {
-    event.preventDefault();
-    
-    const form = event.target;
-    const data = {
-        name: form.name.value,
-        phone: form.phone.value,
-        type: form.type.value,
-        email: form.email.value,
-        message: form.message.value
-    };
+    async function submitForm(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const params = new URLSearchParams({
+          name: form.name.value,
+            phone: form.phone.value,
+            type: form.ptype.value,
+            email: form.email.value,
+            message: form.message.value
+          }).toString();
+        
+        fetch(`https://script.google.com/macros/s/AKfycbzvmRU3-njABUWZn_o8zT76elPxsm-KPj5zXMl_2iiiNkDBEMIL11hNDT5ndu56wRi_/exec?${params}`, {
+                    method: 'GET'
+        });
 
-    console.log(data);
-    
-    const response = fetch('https://script.google.com/macros/s/AKfycbz1P39Q4oAjPE9ODzujNxFMN9UdwS4lScfJpr-bcIZQnsG-SYzarVuMuXztK0lqfl8/exec', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-    
-    const result = response.json();
-    if (result.result === 'success') {
         alert('Thank you, we will contact you shortly.');
         form.reset();
-    } else {
-        alert('Hrrmm, something went wrong.');
     }
-}
+
+    async function submitFormNews(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const params = new URLSearchParams({
+            name: '',
+            phone: '',
+            type: 'newsletter',
+            email: form.email.value,
+            message: ''
+          }).toString();
+        
+        fetch(`https://script.google.com/macros/s/AKfycbzvmRU3-njABUWZn_o8zT76elPxsm-KPj5zXMl_2iiiNkDBEMIL11hNDT5ndu56wRi_/exec?${params}`, {
+                    method: 'GET'
+        });
+
+        form.reset();
+    }
+
 </script>
 
 </head>
@@ -139,7 +148,7 @@ function submitForm(event) {
             How many data implementations are you getting for your money per year?
           </h1>
           <h1>
-            <br><i>If you said 2 or more, well done, you're one of the lucky ones. For everyone else, we're here to get you on track.</i>
+            <br><i>On average, data projects take half a year before the first release, how much are you paying without output per year?</i>
           </h1>
         </div>
       </div>
@@ -538,13 +547,13 @@ function submitForm(event) {
                   <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone Number" />
                 </div>
                 <div class="form-group col-lg-6">
-                  <select name="type" id="type" class="form-control wide">
-                    <option value="">Project Type</option>
-                    <option value="">Intelligent Automation</option>
-                    <option value="">Generative A.I</option>
-                    <option value="">Machine Learning</option>
-                    <option value="">Data Platform</option>
-                    <option value="">Other</option>
+                  <select name="ptype" id="ptype" class="form-control wide">
+                    <option value="Project Type">Project Type</option>
+                    <option value="Intelligent Automation">Intelligent Automation</option>
+                    <option value="Generative A.I">Generative A.I</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Data Platform">Data Platform</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
               </div>
@@ -707,8 +716,8 @@ function submitForm(event) {
               <h5>
                 NEWSLETTER
               </h5>
-              <form action="">
-                <input type="text" placeholder="Enter Your Email" />
+              <form onsubmit="submitFormNews(event)">
+                <input type="email" placeholder="Enter Your Email" id="email" name="email" required />
                 <button type="submit">
                   Subscribe
                 </button>
